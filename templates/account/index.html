@@ -1,0 +1,112 @@
+{% load static %}
+{% include 'account/header.html' %}
+
+    <div class="content-body">
+        <div class="container">
+        
+            <div class="row">
+                <div class="col-xxl-12 col-xl-12 col-lg-12">
+                    <h4 class="card-title mb-3">Balance Details</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="total-balance">
+                                        <p>Total Balance</p>
+                                        <h2>{{ general_list.currency_symbol|safe }} {{ user.profile.balance }}</h2>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <div class="balance-stats active">
+                                        <p>Total Deposit</p>
+                                        <h3>{{ general_list.currency_symbol|safe }}{{ total_deposit.amount__sum }}</h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <div class="balance-stats">
+                                        <p>Total Witdhraw</p>
+                                        <h3>{{ general_list.currency_symbol|safe }}{% if total_withdraw.amount__sum == Null %}0{% else %}{{ total_withdraw.amount__sum }}{% endif %} </h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <div class="balance-stats">
+                                        <p>Total Invest</p>
+                                        <h3><h3>{{ general_list.currency_symbol|safe }}{% if total_invest.amount__sum == Null %}0{% else %}{{ total_invest.amount__sum }}{% endif %} </h3></h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <div class="balance-stats">
+                                        <p>Debt</p>
+                                        <h3><h3>{{ general_list.currency_symbol|safe }}{% if total_earning.amount__sum == Null %}0{% else %}{{ total_earning.amount__sum }}{% endif %} </h3></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xxl-12 col-xl-12 col-lg-12">
+                    <div class="card-header px-0 pt-0">
+                        <h4 class="card-title">Latest earning</h4>
+                    </div>
+                    <div class=" top-creators-content">
+
+                        {% for earning in user.earnings_set.all %}
+                    
+                            <div class="d-flex justify-content-between creator-widget active  align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <div class="top-creators-user-img me-3"><img src="https://neftify-html.vercel.app/images/items/item_1.png" alt=""
+                                            width="60"></div>
+                                    <div class="top-creators-info">
+                                        <h5 class="mb-0">{{ earning.amount }}</h5>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <h5 class="text-primary">{{ earning.date }}</h5>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    
+
+                         
+
+                        
+                    </div>
+                </div>
+
+
+                <div class="col-xxl-12 col-xl-12 col-lg-12">
+                    <h4 class="card-title mb-3">Investment</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="chartjs-size-monitor">
+                                <div class="chartjs-size-monitor-expand">
+                                    <div class=""></div>
+                                </div>
+                                <div class="chartjs-size-monitor-shrink">
+                                    <div class=""></div>
+                                </div>
+                            </div><canvas height="300" width="920" id="activity"
+                                style="display: block; width: 920px; height: 300px;"
+                                class="chartjs-render-monitor"></canvas>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<script src="{% static 'account/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'account/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'account/vendor/chartjs/chart.bundle.min.js' %}"></script>
+<script src="{% static 'account/js/plugins/chartjs-line-init.js' %}"></script>
+<script src="{% static 'account/js/scripts.js' %}"></script>
+</body>
+
+</html>

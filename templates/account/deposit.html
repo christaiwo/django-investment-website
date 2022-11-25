@@ -1,0 +1,118 @@
+{% load static %}
+{% include 'account/header.html' %}
+
+<div class="content-body">
+    <div class="container">
+        {% include 'flash-message.html' %}
+        <center>
+            <div id="window-closed"></div>
+        </center>
+        <div class="row">
+            <center>
+                <div class="col-xxl-6 col-xl-12 col-lg-12">
+                <h4 class="card-title mb-3">DEPOSIT INTO YOUR ACCOUNT</h4>
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="total-balance">
+                                    <h2>DEPOSIT</h2>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <form method="POST" action="" id="paymentForm">
+                                        {% csrf_token %}
+                                        <input type="hidden" id="email-address" value="{{user.email}}" required />
+
+                                        <input type="number" id="amount"  class="form-control" placeholder="ENTER AMOUNT HERE" required  ><br>
+                                        <button type="submit" onclick="payWithPaystack()" class="btn btn-primary">DEPOSIT</button>
+                                    </form>
+                                      
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </center>
+
+
+        </div>
+
+
+        <div class="col-xl-12">
+                <h4 class="card-title mb-3">DEPOSIT HISTORY</h4>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive api-table">
+                            <table class="table text-uppercase">
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>#TRX ID</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for deposit in user.deposit_set.all %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>#{{ deposit.trx_id }}</td>
+                                        <td>{{ general_list.currency_symbol|safe }}{{ deposit.amount }}</td>    
+                                        <td>{{ deposit.date}}</td>   
+                                        <td><span class="text-success">Completed</span></td> 
+                                    <tr>
+                                    {% endfor %}
+                           
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+</div>
+
+
+
+<script type="text/javascript">
+    const paymentForm = document.getElementById('paymentForm');
+    paymentForm.addEventListener("submit", payWithPaystack, false);
+    function payWithPaystack(e) {
+      e.preventDefault();
+  
+      let handler = PaystackPop.setup({
+        key: '{{general_list.paystack_pk}}', // Replace with your public key
+        email: document.getElementById("email-address").value,
+        amount: document.getElementById("amount").value * 100,
+        
+        // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+        // label: "Optional string that replaces customer email"
+        onClose: function(){
+          document.getElementById('window-closed').innerHTML = '<div class="alert alert-danger text-center text-uppercase">Payment Canceled</div>'
+        },
+        callback: function(response){
+          window.location = "deposit/"+response.reference;
+        }
+      });
+  
+      handler.openIframe();
+    }
+  </script>
+
+<script src="{% static 'account/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'account/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'account/vendor/chartjs/chart.bundle.min.js' %}"></script>
+<script src="{% static 'account/js/plugins/chartjs-line-init.js' %}"></script>
+<script src="{% static 'account/js/scripts.js' %}"></script>
+
+</body>
+
+</html>

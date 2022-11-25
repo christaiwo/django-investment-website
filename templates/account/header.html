@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> {{ general_list.site_name }} - {{ page_desc }} </title>
+    <meta name="description" content="{{ page_name }}  {{ page_desc }}">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'logo.svg' %}">
+    <link rel="stylesheet" href="{% static 'account/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'account/css/icons.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script> 
+</head>
+
+<body class="@@dashboard">
+
+<div id="preloader"><i>.</i><i>.</i><i>.</i></div>
+
+<div id="main-wrapper" class="admin">
+
+    <div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xxl-12">
+                <div class="header-content">
+                    <div class="header-left">
+                        <div class="brand-logo"><a class="mini-logo" href="{% url 'account' %}"><img src="{% static 'logo-2.svg' %}" alt=""
+                                    width="40"></a></div>
+                       
+                    </div>
+                    <div class="header-right">
+                        <!-- <div class="theme-switch"><i class="ri-sun-line"></i></div> -->
+
+                        <div class="dark-light-toggle theme-switch" onclick="themeToggle()">
+                            <span class="dark"><i class="ri-moon-line"></i></span>
+                            <span class="light"><i class="ri-sun-line"></i></span>
+                        </div>
+
+
+                       
+                        <div class="dropdown profile_log dropdown">
+                            <div data-bs-toggle="dropdown">
+                                <div class="user icon-menu active"><span><img src="{% static 'account/images/avatar/9.jpg' %}" alt=""></span>
+                                </div>
+                            </div>
+                            <div tabindex="-1" class="dropdown-menu dropdown-menu-end">
+                                <div class="user-email">
+                                    <div class="user">
+                                        <span class="thumb">
+                                            <img src="{% static 'account/images/profile/3.png' %}" alt="">
+                                        </span>
+                                        <div class="user-info">
+                                            <h5>{{ user.first_name }} {{ user.last_name }}</h5>
+                                            <span>{{ user.email }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="dropdown-item" href="{% url 'account' %}">
+                                    <span><i class="ri-layout-grid-fill"></i></span>Dashboard
+                                </a>
+                                <a class="dropdown-item" href="{% url 'account_profile' %}">
+                                    <span><i class="ri-user-line"></i></span>Profile
+                                </a>
+                                <a class="dropdown-item" href="{% url 'account_deposit' %}">
+                                    <span><i class="ri-bank-line"></i></span>Deposit
+                                </a>
+                                <a class="dropdown-item" href="{% url 'account_withdraw' %}">
+                                    <span><i class="ri-wallet-line"></i></span>Witdhraw
+                                </a>
+                                <a class="dropdown-item" href="{% url 'account_pricing' %}">
+                                    <span><i class="ri-star-line"></i></span>Plan
+                                </a>
+                                <a class="dropdown-item" href="{% url 'account_investment' %}">
+                                    <span><i class="ri-time-line"></i></span>Investments
+                                </a>
+                                <a class="dropdown-item logout" href="{% url 'account_logout' %}">
+                                    <i class="ri-logout-circle-line"></i>Logout
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="sidebar">
+    <div class="brand-logo"><a class="full-logo" href="{% url 'account' %}"><img src="{% static 'logo-2.svg' %}" width="100px" alt="" ></a></div>
+    <div class="menu">
+        <ul>
+            <li>
+                <a href="{% url 'account' %}">
+                    <span><i class="ri-layout-grid-fill"></i></span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="{% url 'account_deposit' %}">
+                    <span><i class="ri-bank-line"></i></span>
+                    <span class="nav-text">Deposit</span></a>
+            </li>
+            <li class="">
+                <a href="{% url 'account_withdraw' %}">
+                    <span><i class="ri-wallet-line"></i></span>
+                    <span class="nav-text">Witdhraw</span></a>
+            </li>
+            <li class="">
+                <a href="{% url 'account_pricing' %}">
+                    <span><i class="ri-star-line"></i></span>
+                    <span class="nav-text">Plan</span></a>
+            </li>
+            <li class="">
+                <a href="{% url 'account_investment' %}">
+                    <span><i class="ri-heart-line"></i></span>
+                    <span class="nav-text">Investments</span></a>
+            </li>
+            
+            <li class="">
+                <a href="{% url 'account_profile' %}">
+                    <span><i class="ri-account-box-line"></i></span>
+                    <span class="nav-text">Profile</span></a>
+            </li> 
+        
+            <li class=" logout"><a href="{% url 'account_logout' %}">
+                    <span><i class="ri-logout-circle-line"></i></span>
+                    <span class="nav-text">Signout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

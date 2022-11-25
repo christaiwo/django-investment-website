@@ -1,0 +1,87 @@
+{% load static %}
+{% include 'account/header.html' %}
+
+    <div class="content-body">
+        <div class="container">
+        
+        {% include 'flash-message.html' %}    
+            <div class="row">
+                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                    <h4 class="card-title mb-3">User Profile</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="mb-3 col-xl-12">
+                                        <center><label class="me-sm-2">First Name</label></center>
+                                        <input type="text" name="first_name" class="form-control"  value="{{ user.first_name }}">
+                                    </div>
+                                    <div class="mb-3 col-xl-12">
+                                        <center><label class="me-sm-2">Last Name</label></center>
+                                        <input type="text" name="last_name" class="form-control"  value="{{ user.last_name }}">
+                                    </div>
+                                    <div class="mb-3 col-xl-12">
+                                        <center><label class="me-sm-2">Mobile</label></center>
+                                        <input type="text" name="phone_no" class="form-control" value="{{ user.profile.phone_no }}">
+                                    </div>
+                                    <div class="mb-3 col-xl-12">
+                                        <center><label class="me-sm-2">Email</label></center>
+                                        <input type="text" class="form-control" placeholder="Email" value="{{ user.email }}" readonly>
+                                    </div>
+                                                
+                                        
+                                </div>
+                                <div class="col-12">
+                                    <center><button type="submit" name="submit" value="update" class="btn btn-success">Save</button></center>
+                                </div>
+                               
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                    <h4 class="card-title mb-3">Change Password</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="mb-3 col-xl-12">
+                                        <center><label class="me-sm-2">Current Password</label></center>
+                                        <input type="password" name="password" class="form-control"
+                                            placeholder="**********">
+                                    </div>
+                                    <div class="mb-3 col-xl-12">
+                                        <center><label class="me-sm-2">New Password</label></center>
+                                        <input type="password" name="new_password" class="form-control"
+                                            placeholder="**********">
+                                    </div>
+                                    <div class="col-12">
+                                        <center><button type="submit" name="submit" value="change_password" class="btn btn-success">Save</button></center>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<script src="{% static 'account/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'account/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'account/vendor/chartjs/chart.bundle.min.js' %}"></script>
+<script src="{% static 'account/js/plugins/chartjs-line-init.js' %}"></script>
+<script src="{% static 'account/js/scripts.js' %}"></script>
+</body>
+
+</html>

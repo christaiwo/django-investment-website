@@ -1,0 +1,61 @@
+{% load static %}
+{% include 'account/header.html' %}
+
+<div class="content-body">
+    <div class="container">
+        {% include 'flash-message.html' %}
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12">
+                
+                <div class="card">
+                   
+                    <div class="card-body">
+                        <div class="buy-sell-widget">
+                           
+                            <div class="tab-content tab-content-default">
+                                <div class="tab-pane fade show active" role="tabpanel">
+                                    <form method="post" name="myform" action="" class="currency_validate">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <label class="me-sm-2">Enter your amount</label>
+                                            <div class="input-group">
+                                                <input type="number" name="amount" required class="form-control"
+                                                    placeholder="{{ general_list.currency_symbol|safe }}{{plan.minimum}} ">
+                                            </div>
+                                        </div>
+                                        <button type="submit" name="submit" value="confirm"
+                                            class="btn btn-success w-100">CONFIRM</button>
+
+                                    </form>
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <p class="p-4">Note: Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi cupiditate
+                    suscipit explicabo voluptas eos in tenetur error temporibus dolorum. Nulla!</p>
+            </div>
+          
+        </div>
+
+
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+<script src="{% static 'account/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'account/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'account/vendor/chartjs/chart.bundle.min.js' %}"></script>
+<script src="{% static 'account/js/plugins/chartjs-line-init.js' %}"></script>
+<script src="{% static 'account/js/scripts.js' %}"></script>
+
+</body>
+
+</html>

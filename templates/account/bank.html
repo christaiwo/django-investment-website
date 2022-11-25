@@ -1,0 +1,43 @@
+{% load static %}
+{% include 'account/header.html' %}
+
+<div class="content-body">
+    <div class="container">
+        {% include 'flash-message.html' %}
+       
+        <div class="row justify-content-center h-100 align-items-center  my-5">
+            <div class="col-xl-5 col-md-6">
+                
+                <div class="auth-form card text-center ">
+                    <br>
+                    <h1>LINK A BANK ACCOUNT</h1>
+                    <div class="card-body text-uppercase">
+                        <form action="" method="POST" >
+                            {% csrf_token %}
+                            <div class="row">
+                                {{ form }}<br><br>
+                                <div class="text-center col-12">
+                                    <a href="{% url 'account' %}" class="btn btn-primary mx-2">Back</a>
+                                    <button type="submit" name="update" class="btn btn-success mx-2">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+</div>
+
+    </div>
+</div>
+
+</div>
+
+<script src="{% static 'account/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'account/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'account/vendor/chartjs/chart.bundle.min.js' %}"></script>
+<script src="{% static 'account/js/plugins/chartjs-line-init.js' %}"></script>
+<script src="{% static 'account/js/scripts.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+{% load static %}
+{% include 'account/header.html' %}
+
+<div class="content-body">
+    <div class="container">
+        {% include 'flash-message.html' %}
+        <center>
+            <div id="window-closed"></div>
+        </center>
+        <div class="row">
+            <center>
+                <div class="col-xxl-6 col-xl-12 col-lg-12">
+                <h4 class="card-title mb-3">WITHDRAW FROM YOUR ACCOUNT</h4>
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="total-balance">
+                                    <h2>WITHDRAW</h2>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <form method="POST" action="">
+                                        {% csrf_token %}
+                                        <input type="number" name="amount"  class="form-control" placeholder="ENTER AMOUNT HERES" required  ><br>
+
+                                        {% if user.bank.status == 0 %}
+                                        <a href="{% url 'account_bank' %}" class="btn btn-primary">ADD PAYMENT METHOND</a>
+                                        {% else %}
+                                        <button type="submit" name="submit" value="withdraw" class="btn btn-primary">DEPOSIT</button>
+                                        {% endif %}
+                                    </form>
+                                      
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </center>
+
+
+        </div>
+
+
+        <div class="col-xl-12">
+                <h4 class="card-title mb-3">WITHDRAW HISTORY</h4>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive api-table">
+                            <table class="table text-uppercase">
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>#TRX ID</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for witdhraw in user.withdraw_set.all %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>#{{ witdhraw.trx_id }}</td>
+                                        <td>{{ general_list.currency_symbol|safe }}{{ witdhraw.amount }}</td>    
+                                        <td>{{ witdhraw.date}}</td>   
+                                        <td>
+                                            {% if withdraw.status == 1 %}
+                                            <span class="text-success">Completed</span>
+                                            {% else %}
+                                            <span class="text-warning">Pending</span>
+                                            {% endif %}
+                                        </td> 
+                                    <tr>
+                                    {% endfor %}
+                           
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+</div>
+
+
+<script src="{% static 'account/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'account/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'account/vendor/chartjs/chart.bundle.min.js' %}"></script>
+<script src="{% static 'account/js/plugins/chartjs-line-init.js' %}"></script>
+<script src="{% static 'account/js/scripts.js' %}"></script>
+
+</body>
+
+</html>

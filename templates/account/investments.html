@@ -1,0 +1,80 @@
+{% load static %}
+{% include 'account/header.html' %}
+
+<div class="content-body">
+    <div class="container">
+        {% include 'flash-message.html' %}
+       
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card text-uppercase">
+                    <div class="card-header border-0">
+                        <h4 class="card-title">All Investments</h4>
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="transaction-table">
+                            <div class="table-responsive">
+                                <table class="table mb-0 table-responsive-sm">
+                                    <tbody>
+                                        
+                                        <tr>
+                                            <td><span class=""><i>S/N</i></span></td>
+                                            <td class="">AMOUNT</td>
+                                            <td>DAILY PROFIT</td>
+                                            <td>NET PROFIT</td>
+                                            <td>START DATE</td>
+                                            <td>END DATE</td>
+                                            <td>STATUS</td>
+                                        </tr>
+
+                                        {% for id in user.tradings_set.all %}
+                                        <tr>
+                                            <td><span class="sold-thumb"><i>{{ forloop.counter }}</i></span>
+                                            </td>
+                                            
+                                            <td class="text-danger">{{ general_list.currency_symbol|safe }}{{id.amount}}</td>
+                                            <td>{{ general_list.currency_symbol|safe }}{{id.daily_profit}}</td>
+                                            <td>{{ general_list.currency_symbol|safe }}{{id.net_profit}}</td>
+                                            <td>{{id.start|date}}</td>
+                                            <td>{{id.end|date}}</td>
+                                            <td>
+                                                {% if id.status == 0 %}
+                                                    <span class="badge bg-danger">Closed</span>
+                                                {% elif id.status == 1 %}
+                                                <span class="badge bg-success">Open</span>
+                                                {% endif %}
+                                                
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+<script src="{% static 'account/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'account/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'account/vendor/chartjs/chart.bundle.min.js' %}"></script>
+<script src="{% static 'account/js/plugins/chartjs-line-init.js' %}"></script>
+<script src="{% static 'account/js/scripts.js' %}"></script>
+
+</body>
+
+</html>

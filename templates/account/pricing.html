@@ -1,0 +1,74 @@
+{% load static %}
+{% include 'account/header.html' %}
+
+<div class="content-body">
+    <div class="container">
+        {% include 'flash-message.html' %}
+        <section>
+            <div class="container py-5 ">
+              <div class="row text-center align-items-end">
+                <br>
+                {% for id in trading_plans  %}
+                <!-- Pricing Table-->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                  <div class="p-5 rounded-lg shadow">
+                    <h1 class="h6 text-uppercase font-weight-bold mb-4">{{id.name}}</h1>
+                    <h2 class="h1 font-weight-bold">{{id.daily_profit}}<span class="text-small font-weight-normal ml-2">% Daily</span></h2>
+
+                    <div class="custom-separator my-4 mx-auto bg-primary"></div>
+
+                    <ul class="list-unstyled my-5 text-small text-left">
+                      <li class="mb-3">
+                        <i class="fa fa-check mr-2 text-primary"></i> Days : {{id.duration}} </li>
+
+                        {% if id.withdraw_type == "daily" %}
+                        <li class="mb-3">
+                          <i class="fa fa-check mr-2 text-primary"></i> Instant Profit Withdrawal every 24 hrs</li>
+                        {% elif id.withdraw_type == "end" %}
+                        <li class="mb-3">
+                          <i class="fa fa-check mr-2 text-primary"></i> Instant Profit Withdrawal at the end of the plan</li>
+                        {% endif %}
+                          
+                      
+                          
+                       
+                      <li class="mb-3">
+                        <i class="fa fa-check mr-2 text-primary"></i> Min. Deposit : {{id.minimum}}</li>
+                      <li class="mb-3">
+                        <i class="fa fa-check mr-2 text-primary"></i> Max. Deposit : {{id.maximum}}</li>
+                          <li class="mb-3">
+                        <i class="fa fa-check mr-2 text-primary"></i> Referral Percent : {{id.ref}}%</li>
+                    </ul>
+                    <a href="{% url 'account_audit' id.id %}" class="btn btn-primary btn-block p-2 shadow rounded-pill">SELECT</a>
+                  </div>
+                </div>
+                <!-- END -->
+                {% endfor %}
+
+
+
+   
+
+              </div>
+            </div>
+          </section>  
+
+
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+<script src="{% static 'account/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'account/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'account/vendor/chartjs/chart.bundle.min.js' %}"></script>
+<script src="{% static 'account/js/plugins/chartjs-line-init.js' %}"></script>
+<script src="{% static 'account/js/scripts.js' %}"></script>
+
+</body>
+
+</html>
